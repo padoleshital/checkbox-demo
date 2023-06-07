@@ -1,0 +1,132 @@
+<h1>TODO list DEMO</h1>
+
+<button class="btn btn-success" (click)="open(content)">Add</button>
+<hr />
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let list of todolist; index as i">
+      <th scope="row">{{ list.id }}</th>
+      <td>
+        {{ list.title }}
+      </td>
+      <td>
+        <input
+          type="checkbox"
+          [(ngModel)]="list.completed"
+          id="flexCheckChecked"
+          [checked]="list.completed"
+          (change)="onChnage()"
+        />
+      </td>
+      <td>
+        <button class="btn btn-primary mx-5" (click)="openEdit(list, content1)">
+          Edit
+        </button>
+        <button class="btn btn-danger" (click)="Delete(list.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Add TODO -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New Todo</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="dateOfBirth">New Todo</label>
+        <div class="input-group">
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control"
+            placeholder="new todo"
+          />
+        </div>
+      </div>
+      <div
+        *ngIf="
+          todoForm.controls['name'].invalid && todoForm.controls['name'].touched
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="todoForm.controls['name']; errors: ['required']">
+          Name is required.
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+      [disabled]="todoForm.invalid"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
+
+<!-- Edit TODO -->
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit New Todo</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editTodoForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="dateOfBirth">New Todo</label>
+        <div class="input-group">
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control"
+            placeholder="new todo"
+          />
+        </div>
+      </div>
+      <div
+        *ngIf="
+          editTodoForm.controls['name'].invalid &&
+          editTodoForm.controls['name'].touched
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="editTodoForm.controls['name']; errors: ['required']">
+          Name is required.
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+      [disabled]="editTodoForm.invalid"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
