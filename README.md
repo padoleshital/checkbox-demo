@@ -1,4 +1,6 @@
 # CheckboxDemo
+![image](https://github.com/padoleshital/checkbox-demo/assets/45750512/e072708f-dd44-4624-8fe8-de983f7b414a)
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.10.
 
